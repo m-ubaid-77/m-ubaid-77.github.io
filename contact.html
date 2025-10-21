@@ -7,10 +7,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <aside class="sidebar">
+  <button class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  
+  <div class="mobile-overlay" id="mobile-overlay"></div>
+  
+  <aside class="sidebar" id="sidebar">
     <div class="profile">
       <img src="profile.jpg" alt="Muhammad Ubaid" />
       <h1>Muhammad Ubaid</h1>
+      <p class="tagline">Building, managing & maintaining clean, performant apps for Mobiles in iOS Native and Flutter</p>
     </div>
     <nav>
       <a href="index.html">About</a>
@@ -19,6 +28,10 @@
       <a href="education.html">Education</a>
       <a href="contact.html" class="active">Contact</a>
     </nav>
+    <div class="download-cv">
+      <a href="Muhammad_Ubaid_CV.pdf" class="btn" download>⬇ Download CV</a>
+    </div>
+    <button class="close-menu" id="close-menu">×</button>
   </aside>
 
   <main>
@@ -27,5 +40,41 @@
     <p>Phone: <a href="tel:+923455220877">+92 345 5220877</a></p>
     <p>GitHub: <a href="https://github.com/m-ubaid-77" target="_blank">github.com/m-ubaid-77</a></p>
   </main>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('mobile-overlay');
+    const closeMenu = document.getElementById('close-menu');
+
+    function toggleMenu() {
+      sidebar.classList.toggle('active');
+      overlay.classList.toggle('active');
+
+      // Hide hamburger when menu is open
+      if (sidebar.classList.contains('active')) {
+        hamburger.style.display = 'none';
+      } else {
+        hamburger.style.display = 'flex';
+      }
+    }
+
+    function closeMenuHandler() {
+      sidebar.classList.remove('active');
+      overlay.classList.remove('active');
+      hamburger.style.display = 'flex';
+    }
+
+    hamburger.addEventListener('click', toggleMenu);
+    closeMenu.addEventListener('click', closeMenuHandler);
+    overlay.addEventListener('click', closeMenuHandler);
+
+    // Close menu on window resize if screen becomes larger
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 768) {
+        sidebar.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
